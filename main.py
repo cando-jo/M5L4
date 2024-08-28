@@ -1,4 +1,5 @@
 #pgzero
+import random
 
 WIDTH = 600 # Pencere Genişliği
 HEIGHT = 300 # Pencere Yüksekliği
@@ -9,29 +10,34 @@ FPS = 30 # Saniyedeki Kare Sayı
 # Nesneler
 uzayli = Actor('uzaylı', (50, 240))
 arkaplan = Actor("arkaplan")
-kutu = Actor('kutu', (550, 265))
+kutu = Actor('kutu', (650, 265))
 yeni_resim = 'uzaylı' # Anlık Görüntüyü Takip Eder
-ari = Actor('arı', (850, 175))
+ari = Actor('arı', (650, 175))
 ob = Actor("OB")
 oyun_sonu = 0
 puan = 0
+dusman = random.randint(1, 2)
 
 def kutular():
     global puan
+    global dusman
     if kutu.x > -20:
         kutu.x = kutu.x - 5
         kutu.angle = kutu.angle + 5
     else:
-        kutu.x = WIDTH + 20
+        kutu.x = WIDTH + 50
         puan = puan + 1
+        dusman = random.randint(1, 2)
         
 def arilar():
     global puan
+    global dusman
     if ari.x > -20:
         ari.x = ari.x - 5
     else:
-        ari.x = WIDTH + 20
+        ari.x = WIDTH + 50
         puan = puan + 1
+        dusman = random.randint(1, 2)
         
 def draw():
     arkaplan.draw()
@@ -47,9 +53,12 @@ def update(dt):
     global yeni_resim
     global oyun_sonu
     global puan
+    global dusman
     
-    kutular()
-    arilar()
+    if dusman == 1:
+        kutular()
+    else:    
+        arilar()
     
     if keyboard.left or keyboard.a and uzayli.x > 20:
         uzayli.x = uzayli.x - 5
@@ -78,6 +87,7 @@ def update(dt):
         uzayli.pos = (50, 240)
         kutu.pos = (550, 265)
         ari.pos = (850, 175)
+        dusman = random.randint(1, 2)
     
     # Çarpışma
     if uzayli.colliderect(kutu) or uzayli.colliderect(ari):
