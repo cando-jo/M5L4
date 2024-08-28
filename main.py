@@ -12,32 +12,37 @@ uzayli = Actor('uzaylı', (50, 240))
 arkaplan = Actor("arkaplan")
 kutu = Actor('kutu', (650, 265))
 yeni_resim = 'uzaylı' # Anlık Görüntüyü Takip Eder
-ari = Actor('arı', (650, 175))
+ari = Actor('arı', (650, 130))
 ob = Actor("OB")
 oyun_sonu = 0
 puan = 0
 dusman = random.randint(1, 2)
+speed = 5
 
 def kutular():
     global puan
     global dusman
+    global speed
     if kutu.x > -20:
-        kutu.x = kutu.x - 5
+        kutu.x = kutu.x - speed
         kutu.angle = kutu.angle + 5
     else:
         kutu.x = WIDTH + 50
         puan = puan + 1
         dusman = random.randint(1, 2)
+        speed += 1
         
 def arilar():
     global puan
     global dusman
+    global speed
     if ari.x > -20:
-        ari.x = ari.x - 5
+        ari.x = ari.x - speed
     else:
         ari.x = WIDTH + 50
         puan = puan + 1
         dusman = random.randint(1, 2)
+        speed += 1
         
 def draw():
     arkaplan.draw()
@@ -85,8 +90,8 @@ def update(dt):
         oyun_sonu = 0 
         puan = 0
         uzayli.pos = (50, 240)
-        kutu.pos = (550, 265)
-        ari.pos = (850, 175)
+        kutu.pos = (650, 265)
+        ari.pos = (650)
         dusman = random.randint(1, 2)
     
     # Çarpışma
