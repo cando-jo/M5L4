@@ -59,6 +59,7 @@ def update(dt):
     global oyun_sonu
     global puan
     global dusman
+    global speed
     
     if dusman == 1:
         kutular()
@@ -91,9 +92,10 @@ def update(dt):
         puan = 0
         uzayli.pos = (50, 240)
         kutu.pos = (650, 265)
-        ari.pos = (650)
+        ari.pos = (650, 130)
         dusman = random.randint(1, 2)
-    
+        speed = 5
+
     # Çarpışma
     if uzayli.colliderect(kutu) or uzayli.colliderect(ari):
         oyun_sonu = 1
